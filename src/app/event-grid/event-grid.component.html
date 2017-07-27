@@ -3,6 +3,14 @@
         [data]="items"
         (sortFieldChange)="sortChanged($event)">
     <sky-grid-column
+            id="id"
+            field="id"
+            [isSortable]=false
+            [locked]=true
+            [template]="menu"
+    >
+    </sky-grid-column>
+    <sky-grid-column
             id="name"
             field="name"
             heading="name"
@@ -39,4 +47,8 @@
             heading="price"
     >
     </sky-grid-column>
+
+    <ng-template let-row="row" #menu>
+        <event-menu [event]="row"></event-menu>
+    </ng-template>
 </sky-grid>
