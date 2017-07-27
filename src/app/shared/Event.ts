@@ -1,4 +1,4 @@
-import { Ticket } from './Ticket.js';
+import { Ticket } from './Ticket';
 export class Event {
     constructor(
         public id: number = undefined,
