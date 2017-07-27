@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Event } from './Event';
-import { error } from 'selenium-webdriver';
 
 @Injectable()
 export class EventService {

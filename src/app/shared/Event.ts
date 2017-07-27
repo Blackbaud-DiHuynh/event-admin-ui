@@ -1,11 +1,12 @@
+import { Ticket } from './Ticket.js';
 export class Event {
     constructor(
-        public id: number = 50,
-        public name: string = '',
+        public id: number = undefined,
+        public name: string = undefined,
         public date: Date = new Date,
         public time: Date = new Date,
-        public location: string = '',
-        public capacity: number = 100,
-        public ticketId: number = 25
+        public location: string = undefined,
+        public capacity: number = undefined,
+        public tickets: [Ticket] = [new Ticket()]
     ) {}
 }

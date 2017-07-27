@@ -33,7 +33,7 @@
 
                 <div class="sky-form-group">
                     <label>Ticket Price: </label>
-                    <input #list=ngModel type="text" class="sky-form-control input-field" id="price" [(ngModel)]="price" name="price">
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="price" [(ngModel)]="event.tickets[0].basePrice" name="price">
                 </div>
             </form>
         </div>
