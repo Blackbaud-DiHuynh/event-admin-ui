@@ -8,22 +8,32 @@
 
                 <div class="sky-form-group">
                     <label>Event name: </label>
-                    <input #list=ngModel type="text" class="sky-form-control input-field" id="name" [(ngModel)]="name" name="name">
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="name" [(ngModel)]="event.name" name="name">
                 </div>
 
                 <div class="sky-form-group">
                     <label>Event location: </label>
-                    <input #list=ngModel type="text" class="sky-form-control input-field" id="location" [(ngModel)]="location" name="location">
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="location" [(ngModel)]="event.location" name="location">
                 </div>
 
                 <div class="sky-input-group">
                     <label>Time of Event: </label>
                     <sky-datepicker #datePicker>
-                        <input [(ngModel)]="selectedDate" name="date" [skyDatepickerInput]="datePicker" #date="ngModel" class="sky-form-control" />
+                        <input [(ngModel)]="event.date" name="date" [skyDatepickerInput]="datePicker" #date="ngModel" class="sky-form-control" />
                     </sky-datepicker>
                     <sky-timepicker #timePicker>
                         <input type="text" name="time" [skyTimepickerInput]="timePicker" class="sky-form-control" [timeFormat]="format12" [(ngModel)]="selectedTime" #time="ngModel"/>
                     </sky-timepicker>
+                </div>
+
+                <div class="sky-form-group">
+                    <label>Event capacity: </label>
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="capactiy" [(ngModel)]="event.capacity" name="capacity">
+                </div>
+
+                <div class="sky-form-group">
+                    <label>Ticket Price: </label>
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="price" [(ngModel)]="price" name="price">
                 </div>
             </form>
         </div>
