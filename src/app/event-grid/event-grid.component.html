@@ -1,0 +1,42 @@
+<sky-grid
+        fit="scroll"
+        [data]="items"
+        (sortFieldChange)="sortChanged($event)">
+    <sky-grid-column
+            id="name"
+            field="name"
+            heading="name"
+    >
+    </sky-grid-column>
+    <sky-grid-column
+            id="location"
+            field="location"
+            heading="location"
+
+    >
+    </sky-grid-column>
+    <sky-grid-column
+            id="date"
+            field="date"
+            heading="date"
+    >
+    </sky-grid-column>
+    <sky-grid-column
+            id="remainingTickets"
+            field="remainingTickets"
+            heading="remainingTickets"
+    >
+    </sky-grid-column>
+    <sky-grid-column
+            id="ticketsSold"
+            field="ticketsSold"
+            heading="ticketsSold"
+    >
+    </sky-grid-column>
+    <sky-grid-column
+            id="price"
+            field="price"
+            heading="price"
+    >
+    </sky-grid-column>
+</sky-grid>

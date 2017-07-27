@@ -1,0 +1,35 @@
+<sky-modal xmlns="http://www.w3.org/1999/html">
+    <sky-modal-header>
+        Event details
+    </sky-modal-header>
+    <sky-modal-content>
+        <div>
+            <form>
+
+                <div class="sky-form-group">
+                    <label>Event name: </label>
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="name" [(ngModel)]="name" name="name">
+                </div>
+
+                <div class="sky-form-group">
+                    <label>Event location: </label>
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="location" [(ngModel)]="location" name="location">
+                </div>
+
+                <div class="sky-input-group">
+                    <label>Time of Event: </label>
+                    <sky-datepicker #datePicker>
+                        <input [(ngModel)]="selectedDate" name="date" [skyDatepickerInput]="datePicker" #date="ngModel" class="sky-form-control" />
+                    </sky-datepicker>
+                    <sky-timepicker #timePicker>
+                        <input type="text" name="time" [skyTimepickerInput]="timePicker" class="sky-form-control" [timeFormat]="format12" [(ngModel)]="selectedTime" #time="ngModel"/>
+                    </sky-timepicker>
+                </div>
+            </form>
+        </div>
+
+    </sky-modal-content>
+    <sky-modal-footer>
+        <button type="button" class="sky-btn sky-btn-primary" (click)="modalInstance.save()">Save</button>
+    </sky-modal-footer>
+</sky-modal>
