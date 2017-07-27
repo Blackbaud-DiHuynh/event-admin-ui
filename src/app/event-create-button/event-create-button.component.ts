@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {SkyModalService} from '@blackbaud/skyux/dist/modules/modal';
 import { EventFormModalComponent } from '../event-form-modal/event-form-modal.component';
+import { EventFormModalContext } from '../event-form-modal/event-from-modal-context';
 
 @Component({
     selector: 'event-create-button',
@@ -13,10 +14,10 @@ export class EventCreateButtonComponent  {
 
     public openModal() {
 
-        // let context = new MerchantAccountFormContext();
-        //
+        let context = new EventFormModalContext();
+
         let options: any = {
-            providers: [{ provide: EventFormModalComponent }]
+            providers: [{ provide: EventFormModalContext, useValue: context }]
         };
 
         this.modal.open(EventFormModalComponent, options);

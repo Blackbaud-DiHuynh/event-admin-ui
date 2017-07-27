@@ -1,27 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListSortFieldSelectorModel } from '@blackbaud/skyux/dist/core';
+import { Subscription } from 'rxjs';
+import { EventService } from '../shared/EventService';
+import { Event } from '../shared/Event';
+import { EventSubmissionService } from '../shared/EventSubmissionService';
+import { SkyModalService } from '@blackbaud/skyux/dist/modules/modal';
 
 @Component({
     selector: 'event-grid',
     templateUrl: './event-grid.component.html'
 })
-export class SkyGridDemoComponent {
-    public items: any[] = [
-        { id: '1', name: 101, location: 'Apple', date: 'Anne eats apples', remainingTickets: 'Comp A', ticketsSold: '1800', price: '$50.00'},
-        { id: '2', name: 202, location: 'Banana', date: 'Ben eats bananas', remainingTickets: 'Comp B', ticketsSold: '1800', price: '$50.00'},
-        { id: '3', name: 303, location: 'Pear', date: 'Patty eats pears', remainingTickets: 'Comp C', ticketsSold: '1800', price: '$50.00'},
-        { id: '4', name: 404, location: 'Grape', date: 'George eats grapes', remainingTickets: 'Comp D', ticketsSold: '1800', price: '$50.00'},
-        { id: '5', name: 505, location: 'Banana', date: 'Becky eats bananas',
-            remainingTickets: 'Comp E', ticketsSold: '1800', price: '$50.00'},
-        { id: '6', name: 606, location: 'Lemon', date: 'Larry eats lemons', remainingTickets: 'Comp F', ticketsSold: '1800', price: '$50.00'},
-        { id: '7', name: 707, location: 'Strawberry', date: 'Sally eats strawberries',
-            remainingTickets: 'Comp G', ticketsSold: '1800', price: '$50.00'}
-    ];
+export class EventGridComponent implements OnInit {
+    public events: Event[] = [];
+    private modalSubscription: Subscription;
+
+    constructor(private eventService: EventService,
+                private modal: SkyModalService,
+                private eventSubmissionService: EventSubmissionService) { }
+
+    public ngOnInit(): void {
+        this.getAllEvents();
+
+        this.modalSubscription = this.eventSubmissionService.result.subscribe(
+            result => {
+                this.getAllEvents();
+            }
+        );
+    }
 
     public sortChanged(activeSort: ListSortFieldSelectorModel) {
         let sortField = activeSort.fieldSelector;
         let descending = activeSort.descending;
-        this.items = this.items.sort((a: any, b: any) => {
+        this.events = this.events.sort((a: any, b: any) => {
             let value1 = a[sortField];
             let value2 = b[sortField];
 
@@ -43,5 +53,16 @@ export class SkyGridDemoComponent {
             }
             return result;
         }).slice();
+    }
+
+    private getAllEvents(): void {
+        this.eventService.getAllEvents().subscribe(
+            retrievedEvents => {
+                this.events = retrievedEvents;
+            },
+            error => {
+                console.log(error);
+            }
+        );
     }
 }

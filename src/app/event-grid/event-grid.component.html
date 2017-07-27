@@ -1,6 +1,6 @@
 <sky-grid
         fit="scroll"
-        [data]="items"
+        [data]="events"
         (sortFieldChange)="sortChanged($event)">
     <sky-grid-column
             id="id"
@@ -28,6 +28,7 @@
             id="date"
             field="date"
             heading="date"
+            [template]="dateDisplay"
     >
     </sky-grid-column>
     <sky-grid-column
@@ -51,5 +52,9 @@
 
     <ng-template let-row="row" #menu>
         <event-menu [event]="row"></event-menu>
+    </ng-template>
+
+    <ng-template let-value="value" #dateDisplay>
+        {{value | date: 'medium'}}
     </ng-template>
 </sky-grid>

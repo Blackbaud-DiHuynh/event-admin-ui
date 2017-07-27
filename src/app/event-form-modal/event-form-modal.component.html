@@ -1,4 +1,4 @@
-<sky-modal xmlns="http://www.w3.org/1999/html">
+<sky-modal xmlns="http://www.w3.org/1999/html" (onClose)="console.log('Does this work?')">
     <sky-modal-header>
         Event details
     </sky-modal-header>
@@ -21,9 +21,9 @@
                     <sky-datepicker #datePicker>
                         <input [(ngModel)]="event.date" name="date" [skyDatepickerInput]="datePicker" #date="ngModel" class="sky-form-control" />
                     </sky-datepicker>
-                    <sky-timepicker #timePicker>
-                        <input type="text" name="time" [skyTimepickerInput]="timePicker" class="sky-form-control" [timeFormat]="format12" [(ngModel)]="selectedTime" #time="ngModel"/>
-                    </sky-timepicker>
+                    <!--<sky-timepicker #timePicker>-->
+                        <!--<input type="text" name="time" [skyTimepickerInput]="timePicker" class="sky-form-control" [timeFormat]="format12" [(ngModel)]="selectedTime" #time="ngModel"/>-->
+                    <!--</sky-timepicker>-->
                 </div>
 
                 <div class="sky-form-group">
@@ -40,6 +40,6 @@
 
     </sky-modal-content>
     <sky-modal-footer>
-        <button type="button" class="sky-btn sky-btn-primary" (click)="modalInstance.save()">Save</button>
+        <button type="button" class="sky-btn sky-btn-primary" (click)="save()">Save</button>
     </sky-modal-footer>
 </sky-modal>
