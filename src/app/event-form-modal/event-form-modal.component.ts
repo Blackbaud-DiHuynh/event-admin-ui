@@ -79,7 +79,7 @@ export class EventFormModalComponent implements OnInit {
 
     private processDynamicTrigger() : void {
         this.dynamicTriggers[0].ticketId = this.event.tickets[0].id;
-        this.dynamicTriggers[0].inventoryThreshold = this.event.tickets[0].capacity * (this.dynamicTriggers[0].percentSoldThreshold / 100);
+        this.dynamicTriggers[0].inventoryThreshold = this.event.tickets[0].capacity - (this.event.tickets[0].capacity * (this.dynamicTriggers[0].percentSoldThreshold / 100));
         this.dynamicRuleService.createDynamicRule(this.dynamicTriggers[0]).subscribe();
 
     }
