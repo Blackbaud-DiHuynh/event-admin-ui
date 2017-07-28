@@ -4,5 +4,6 @@ export class Ticket {
         public basePrice: number = undefined,
         public eventId: number = undefined,
         public currentPrice: number = undefined,
+        public capacity: number = undefined
     ) {}
 }

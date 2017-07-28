@@ -5,6 +5,8 @@ import { EventService } from '../shared/EventService';
 import { EventSubmissionService } from '../shared/EventSubmissionService';
 import { Operation } from '../shared/operation';
 import { EventFormModalContext } from './event-from-modal-context';
+import { DynamicRule } from '../shared/DynamicRule';
+import { DynamicRuleService } from '../shared/DynamicRuleService';
 
 @Component({
     selector: 'event-form-modal',
@@ -16,10 +18,12 @@ export class EventFormModalComponent implements OnInit {
     public format12 = 'hh';
     public price: number;
     public selectedTime;
+    public dynamicTriggers: DynamicRule[] = [];
 
     constructor(public modalInstance: SkyModalInstance,
                 private eventService: EventService,
                 private eventSubmissionService: EventSubmissionService,
+                private dynamicRuleService: DynamicRuleService,
                 public context: EventFormModalContext){ }
 
     public ngOnInit(): void {
@@ -39,6 +43,7 @@ export class EventFormModalComponent implements OnInit {
         //     this.setTime();
         // }
         if (this.operation === Operation.CREATE) {
+            this.event.tickets[0].capacity = this.event.capacity;
             this.eventService.createEvent(this.event).subscribe(
                 savedEvent => {
                     if (savedEvent.id !== -1) {
@@ -48,6 +53,7 @@ export class EventFormModalComponent implements OnInit {
                     } else {
                         this.eventSubmissionService.failure(Operation.CREATE);
                     }
+                    this.processDynamicTrigger();
                 }
             );
         } else {
@@ -64,6 +70,18 @@ export class EventFormModalComponent implements OnInit {
             );
         }
         this.modalInstance.save();
+    }
+
+    public addDynamicTrigger() : void {
+        console.log(`We have ${this.dynamicTriggers.length} triggers`);
+        this.dynamicTriggers = this.dynamicTriggers.concat(new DynamicRule());
+    }
+
+    private processDynamicTrigger() : void {
+        this.dynamicTriggers[0].ticketId = this.event.tickets[0].id;
+        this.dynamicTriggers[0].inventoryThreshold = this.event.tickets[0].capacity * (this.dynamicTriggers[0].percentSoldThreshold / 100);
+        this.dynamicRuleService.createDynamicRule(this.dynamicTriggers[0]).subscribe();
+
     }
     //
     // private setTime(): void {

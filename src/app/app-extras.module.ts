@@ -5,6 +5,7 @@ import { EventFormModalComponent } from './event-form-modal/event-form-modal.com
 import { EventService } from './shared/EventService';
 import { EventSubmissionService } from './shared/EventSubmissionService';
 import { SkyModule } from '@blackbaud/skyux/dist/core';
+import { DynamicRuleService } from './shared/DynamicRuleService';
 
 // Specify entry components, module-level providers, etc. here.
 @NgModule({
@@ -15,7 +16,8 @@ import { SkyModule } from '@blackbaud/skyux/dist/core';
     ],
     providers: [
         EventService,
-        EventSubmissionService
+        EventSubmissionService,
+        DynamicRuleService
     ],
     entryComponents: [
         EventFormModalComponent

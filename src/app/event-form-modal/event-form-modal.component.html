@@ -26,15 +26,28 @@
                     <!--</sky-timepicker>-->
                 </div>
 
-                <div class="sky-form-group">
+                <div class="sky-form-group input-capacity">
                     <label>Event capacity: </label>
-                    <input #list=ngModel type="text" class="sky-form-control input-field" id="capactiy" [(ngModel)]="event.capacity" name="capacity">
+                    <input #list=ngModel type="text" class="sky-form-control input-field" id="capacity" [(ngModel)]="event.capacity" name="capacity">
                 </div>
 
-                <div class="sky-form-group">
+                <div class="sky-form-group input-price">
                     <label>Ticket Price: </label>
                     <input #list=ngModel type="text" class="sky-form-control input-field" id="price" [(ngModel)]="event.tickets[0].basePrice" name="price">
                 </div>
+                <div class="sky-form-group">
+                        <button *ngIf="dynamicTriggers.length===0" type="button" class="sky-btn sky-btn-primary add-dynamic-pricing-button" (click)="addDynamicTrigger()"> Add Dynamic Pricing Trigger</button>
+                        <div *ngFor="let dynamicTrigger of dynamicTriggers">
+                            <div class="sky-input-group">
+                                <label>Percent sold: </label>
+                                <input type="text" class="sky-form-control input-field" id="percentSoldThreshold" [(ngModel)]="dynamicTrigger.percentSoldThreshold" name="percentSoldThreshold.dynamicTrigger" placeholder="%">
+                            </div>
+                            <div class="sky-input-group">
+                                <label>Increase by: </label>
+                                <input type="text" class="sky-form-control input-field" id="priceChange" [(ngModel)]="dynamicTrigger.priceChange" name="priceChange.dynamicTrigger" placeholder="$">
+                            </div>
+                        </div>
+                    </div>
             </form>
         </div>
 
