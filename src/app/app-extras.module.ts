@@ -6,6 +6,7 @@ import { EventService } from './shared/EventService';
 import { EventSubmissionService } from './shared/EventSubmissionService';
 import { SkyModule } from '@blackbaud/skyux/dist/core';
 import { DynamicRuleService } from './shared/DynamicRuleService';
+import { EventReadOnlyModalComponent } from './event-read-only-modal/event-read-only-modal.component';
 
 // Specify entry components, module-level providers, etc. here.
 @NgModule({
@@ -20,7 +21,8 @@ import { DynamicRuleService } from './shared/DynamicRuleService';
         DynamicRuleService
     ],
     entryComponents: [
-        EventFormModalComponent
+        EventFormModalComponent,
+        EventReadOnlyModalComponent
     ]
 })
 export class AppExtrasModule { }
