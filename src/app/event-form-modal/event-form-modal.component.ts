@@ -70,16 +70,16 @@ export class EventFormModalComponent implements OnInit {
     }
 
     public addDynamicTrigger(): void {
-        console.log(`We have ${this.dynamicTriggers.length} triggers`);
         this.dynamicTriggers = this.dynamicTriggers.concat(new DynamicRule());
     }
 
     private processDynamicTrigger(): void {
         if (this.dynamicTriggers.length !== 0) {
-            this.dynamicTriggers[0].ticketId = this.event.tickets[0].id;
-            this.dynamicTriggers[0].inventoryThreshold = this.event.tickets[0].capacity - (this.event.tickets[0].capacity * (this.dynamicTriggers[0].percentSoldThreshold / 100));
-            this.dynamicRuleService.createDynamicRule(this.dynamicTriggers[0]).subscribe();
-
+            for (let i = 0; i < this.dynamicTriggers.length; i++) {
+                this.dynamicTriggers[i].ticketId = this.event.tickets[0].id;
+                this.dynamicTriggers[i].inventoryThreshold = this.event.tickets[0].capacity - (this.event.tickets[0].capacity * (this.dynamicTriggers[i].percentSoldThreshold / 100));
+                this.dynamicRuleService.createDynamicRule(this.dynamicTriggers[i]).subscribe();
+            }
         }
     }
 

@@ -23,13 +23,17 @@ export class EventReadOnlyModalComponent implements OnInit {
                 private service: DynamicRuleService){ }
 
     public ngOnInit(): void {
+        this.dynamicRules[0].priceChange=0;
         this.event = this.context.event;
         this.service.getDynamicRules(this.event.tickets[0]).subscribe(
             returnedRules => {
                 this.dynamicRules = returnedRules;
                 for (let i = 0; i < this.dynamicRules.length; i++) {
-                    this.dynamicRules[i].percentSoldThreshold = 100 - (this.event.tickets[0].capacity / this.dynamicRules[i].inventoryThreshold);
+                    this.dynamicRules[i].percentSoldThreshold = 100 + ((-100 * this.dynamicRules[i].inventoryThreshold)/this.event.tickets[0].capacity);
                 }
+                this.dynamicRules.sort(function(a, b) {
+                    return a.percentSoldThreshold - b.percentSoldThreshold;
+                })
             }
         );
     }

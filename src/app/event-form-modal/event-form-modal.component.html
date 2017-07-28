@@ -37,17 +37,18 @@
                 </div>
                 <div class="sky-form-group">
                         <button *ngIf="dynamicTriggers.length===0" type="button" class="sky-btn sky-btn-primary add-dynamic-pricing-button" (click)="addDynamicTrigger()"> Add Dynamic Pricing Trigger</button>
-                        <div *ngFor="let dynamicTrigger of dynamicTriggers">
+                        <div *ngFor="let dynamicTrigger of dynamicTriggers; let i=index">
                             <div class="sky-input-group">
                                 <label>Percent sold: </label>
-                                <input type="text" class="sky-form-control input-field" id="percentSoldThreshold" [(ngModel)]="dynamicTrigger.percentSoldThreshold" name="percentSoldThreshold.dynamicTrigger" placeholder="%">
+                                <input type="text" class="sky-form-control input-field" id="percentSoldThreshold" [(ngModel)]="dynamicTrigger.percentSoldThreshold" name="percentSoldThreshold.{{i}}" placeholder="%">
                             </div>
                             <div class="sky-input-group">
                                 <label>Increase by: </label>
-                                <input type="text" class="sky-form-control input-field" id="priceChange" [(ngModel)]="dynamicTrigger.priceChange" name="priceChange.dynamicTrigger" placeholder="$">
+                                <input type="text" class="sky-form-control input-field" id="priceChange" [(ngModel)]="dynamicTrigger.priceChange" name="priceChange.{{i}}" placeholder="$">
                             </div>
                         </div>
-                    </div>
+                    <button *ngIf="dynamicTriggers.length!==0" type="button" class="sky-btn sky-btn-primary add-dynamic-pricing-button" (click)="addDynamicTrigger()"> Add Dynamic Pricing Trigger</button>
+                </div>
             </form>
         </div>
 

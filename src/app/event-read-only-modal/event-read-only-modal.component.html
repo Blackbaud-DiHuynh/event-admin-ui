@@ -1,12 +1,15 @@
 <sky-modal xmlns="http://www.w3.org/1999/html" (onClose)="console.log('Does this work?')">
     <sky-modal-header>
-        Event Read Only
+        Event View
     </sky-modal-header>
     <sky-modal-content>
+        <h2>
+            {{this.event.name}}
+        </h2>
+        <sky-definition-list-heading>
+            Event Details
+        </sky-definition-list-heading>
         <sky-definition-list labelWidth="150px">
-            <sky-definition-list-heading>
-                {{this.event.name}}
-            </sky-definition-list-heading>
             <sky-definition-list-content>
                 <sky-definition-list-label>
                     Location
@@ -20,7 +23,7 @@
                     Date
                 </sky-definition-list-label>
                 <sky-definition-list-value>
-                    {{this.event.date | date: 'medium'}}
+                    {{this.event.date | date: 'short'}}
                 </sky-definition-list-value>
             </sky-definition-list-content>
             <sky-definition-list-content>
@@ -57,28 +60,31 @@
             </sky-definition-list-content>
         </sky-definition-list>
 
+        <h2>Dynamic Pricing Triggers</h2>
 
-        <sky-definition-list labelWidth="150px">
-            <sky-definition-list-heading>
-                Dynamic Pricing Triggers
-            </sky-definition-list-heading>
-            <sky-definition-list-content>
-                <sky-definition-list-label>
-                    Percent Sold
-                </sky-definition-list-label>
-                <sky-definition-list-value>
-                    {{this.dynamicRules[0].percentSoldThreshold | number:'1.2-2'}}%
-                </sky-definition-list-value>
-            </sky-definition-list-content>
-            <sky-definition-list-content>
-                <sky-definition-list-label>
-                    Price Change
-                </sky-definition-list-label>
-                <sky-definition-list-value>
-                    {{this.dynamicRules[0].priceChange | currency:'USD':true:'1.2-2'}}
-                </sky-definition-list-value>
-            </sky-definition-list-content>
+        <div *ngFor="let dynamicRule of dynamicRules; let i=index">
+            <sky-definition-list labelWidth="150px">
+                <sky-definition-list-heading>
+                    Trigger {{i+1}}
+                </sky-definition-list-heading>
+                <sky-definition-list-content>
+                    <sky-definition-list-label>
+                        Percent Sold
+                    </sky-definition-list-label>
+                    <sky-definition-list-value>
+                        {{this.dynamicRule.percentSoldThreshold | number:'1.2-2'}}%
+                    </sky-definition-list-value>
+                </sky-definition-list-content>
+                <sky-definition-list-content>
+                    <sky-definition-list-label>
+                        Price Change
+                    </sky-definition-list-label>
+                    <sky-definition-list-value>
+                        {{this.dynamicRule.priceChange | currency:'USD':true:'1.2-2'}}
+                    </sky-definition-list-value>
+                </sky-definition-list-content>
 
-        </sky-definition-list>
+            </sky-definition-list>
+        </div>
     </sky-modal-content>
 </sky-modal>
