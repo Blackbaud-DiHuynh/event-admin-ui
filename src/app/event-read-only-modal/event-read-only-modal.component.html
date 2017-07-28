@@ -47,7 +47,7 @@
                     Base Price
                 </sky-definition-list-label>
                 <sky-definition-list-value>
-                    {{this.event.tickets[0].basePrice}}
+                    {{this.event.tickets[0].basePrice | currency:'USD':true:'1.2-2'}}
                 </sky-definition-list-value>
             </sky-definition-list-content>
             <sky-definition-list-content>
@@ -55,7 +55,7 @@
                     Current Price
                 </sky-definition-list-label>
                 <sky-definition-list-value>
-                    {{this.event.tickets[0].currentPrice}}
+                    {{this.event.tickets[0].currentPrice | currency:'USD':true:'1.2-2'}}
                 </sky-definition-list-value>
             </sky-definition-list-content>
         </sky-definition-list>
@@ -83,6 +83,15 @@
                         {{this.dynamicRule.priceChange | currency:'USD':true:'1.2-2'}}
                     </sky-definition-list-value>
                 </sky-definition-list-content>
+                <sky-definition-list-content>
+                    <sky-definition-list-label>
+                        Cumulative Price
+                    </sky-definition-list-label>
+                    <sky-definition-list-value>
+                        {{this.dynamicRule.cumulativePriceChange | currency:'USD':true:'1.2-2'}}
+                    </sky-definition-list-value>
+                </sky-definition-list-content>
+
 
             </sky-definition-list>
         </div>

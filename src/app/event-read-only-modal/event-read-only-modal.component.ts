@@ -34,6 +34,13 @@ export class EventReadOnlyModalComponent implements OnInit {
                 this.dynamicRules.sort(function(a, b) {
                     return a.percentSoldThreshold - b.percentSoldThreshold;
                 })
+                for (let i = 0; i < this.dynamicRules.length; i++) {
+                    if (i===0) {
+                        this.dynamicRules[i].cumulativePriceChange = this.event.tickets[0].basePrice + this.dynamicRules[i].priceChange;
+                    } else {
+                        this.dynamicRules[i].cumulativePriceChange = this.dynamicRules[i-1].cumulativePriceChange + this.dynamicRules[i].priceChange;
+                    }
+                }
             }
         );
     }

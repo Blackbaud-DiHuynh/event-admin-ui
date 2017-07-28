@@ -5,6 +5,7 @@ export class DynamicRule {
         public ticketId: number = undefined,
         public inventoryThreshold: number = undefined,
         public percentSoldThreshold: number = undefined,
+        public cumulativePriceChange: number = undefined,
         public type: string = 'CAPACITY',
     ) {}
 }
