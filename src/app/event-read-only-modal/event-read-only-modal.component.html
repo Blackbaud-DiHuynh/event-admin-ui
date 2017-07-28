@@ -2,4 +2,83 @@
     <sky-modal-header>
         Event Read Only
     </sky-modal-header>
+    <sky-modal-content>
+        <sky-definition-list labelWidth="150px">
+            <sky-definition-list-heading>
+                {{this.event.name}}
+            </sky-definition-list-heading>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Location
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.event.location}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Date
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.event.date | date: 'medium'}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Capacity
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.event.capacity}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Remaining Tickets
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.event.remainingInventory}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Base Price
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.event.tickets[0].basePrice}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Current Price
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.event.tickets[0].currentPrice}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+        </sky-definition-list>
+
+
+        <sky-definition-list labelWidth="150px"s>
+            <sky-definition-list-heading>
+                Dynamic Pricing Triggers
+            </sky-definition-list-heading>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Inventory Threshold
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.dynamicRules[0].inventoryThreshold}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+            <sky-definition-list-content>
+                <sky-definition-list-label>
+                    Price Change
+                </sky-definition-list-label>
+                <sky-definition-list-value>
+                    {{this.dynamicRules[0].priceChange}}
+                </sky-definition-list-value>
+            </sky-definition-list-content>
+
+        </sky-definition-list>
+    </sky-modal-content>
 </sky-modal>
