@@ -38,10 +38,7 @@ export class EventFormModalComponent implements OnInit {
     }
 
     public save(): void {
-        // console.log(this.selectedTime);
-        // if (!(this.selectedTime instanceof Date)) {
-        //     this.setTime();
-        // }
+        this.setTime();
         if (this.operation === Operation.CREATE) {
             this.event.tickets[0].capacity = this.event.capacity;
             this.eventService.createEvent(this.event).subscribe(
@@ -78,15 +75,16 @@ export class EventFormModalComponent implements OnInit {
     }
 
     private processDynamicTrigger(): void {
-        this.dynamicTriggers[0].ticketId = this.event.tickets[0].id;
-        this.dynamicTriggers[0].inventoryThreshold = this.event.tickets[0].capacity - (this.event.tickets[0].capacity * (this.dynamicTriggers[0].percentSoldThreshold / 100));
-        this.dynamicRuleService.createDynamicRule(this.dynamicTriggers[0]).subscribe();
+        if (this.dynamicTriggers.length !== 0) {
+            this.dynamicTriggers[0].ticketId = this.event.tickets[0].id;
+            this.dynamicTriggers[0].inventoryThreshold = this.event.tickets[0].capacity - (this.event.tickets[0].capacity * (this.dynamicTriggers[0].percentSoldThreshold / 100));
+            this.dynamicRuleService.createDynamicRule(this.dynamicTriggers[0]).subscribe();
 
+        }
     }
-    //
-    // private setTime(): void {
-    //     console.log(this.event.time);
-    //     this.event.time.setHours(this.selectedTime.hour);
-    //     this.event.time.setMinutes(this.selectedTime.minute);
-    // }
+
+    private setTime(): void {
+        this.event.date.setHours(this.selectedTime.hour);
+        this.event.date.setMinutes(this.selectedTime.minute);
+    }
 }
