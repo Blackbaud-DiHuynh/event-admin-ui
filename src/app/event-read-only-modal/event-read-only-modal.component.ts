@@ -12,7 +12,7 @@ import { DynamicRuleService } from '../shared/DynamicRuleService';
 })
 export class EventReadOnlyModalComponent implements OnInit {
     public event: Event;
-    public dynamicRules: DynamicRule[] = [new DynamicRule];
+    public dynamicRules: DynamicRule[] = [new DynamicRule()];
     public operation: Operation;
     public format12 = 'hh';
     public price: number;
@@ -27,6 +27,9 @@ export class EventReadOnlyModalComponent implements OnInit {
         this.service.getDynamicRules(this.event.tickets[0]).subscribe(
             returnedRules => {
                 this.dynamicRules = returnedRules;
+                for (let i = 0; i < this.dynamicRules.length; i++) {
+                    this.dynamicRules[i].percentSoldThreshold = 100 - (this.event.tickets[0].capacity / this.dynamicRules[i].inventoryThreshold);
+                }
             }
         );
     }

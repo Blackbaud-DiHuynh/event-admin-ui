@@ -58,16 +58,16 @@
         </sky-definition-list>
 
 
-        <sky-definition-list labelWidth="150px"s>
+        <sky-definition-list labelWidth="150px">
             <sky-definition-list-heading>
                 Dynamic Pricing Triggers
             </sky-definition-list-heading>
             <sky-definition-list-content>
                 <sky-definition-list-label>
-                    Inventory Threshold
+                    Percent Sold
                 </sky-definition-list-label>
                 <sky-definition-list-value>
-                    {{this.dynamicRules[0].inventoryThreshold}}
+                    {{this.dynamicRules[0].percentSoldThreshold | number:'1.2-2'}}%
                 </sky-definition-list-value>
             </sky-definition-list-content>
             <sky-definition-list-content>
@@ -75,7 +75,7 @@
                     Price Change
                 </sky-definition-list-label>
                 <sky-definition-list-value>
-                    {{this.dynamicRules[0].priceChange}}
+                    {{this.dynamicRules[0].priceChange | currency:'USD':true:'1.2-2'}}
                 </sky-definition-list-value>
             </sky-definition-list-content>
 
