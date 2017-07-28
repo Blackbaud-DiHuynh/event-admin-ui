@@ -10,7 +10,8 @@ import { DynamicRuleService } from '../shared/DynamicRuleService';
 
 @Component({
     selector: 'event-form-modal',
-    templateUrl: './event-form-modal.component.html'
+    templateUrl: './event-form-modal.component.html',
+    styleUrls: ['./event-form-modal.component.scss']
 })
 export class EventFormModalComponent implements OnInit {
     public event: Event;
@@ -70,7 +71,11 @@ export class EventFormModalComponent implements OnInit {
     }
 
     public addDynamicTrigger(): void {
-        this.dynamicTriggers = this.dynamicTriggers.concat(new DynamicRule());
+        this.dynamicTriggers.push(new DynamicRule());
+    }
+
+    public removeDynamicTrigger(): void {
+        this.dynamicTriggers.pop();
     }
 
     private processDynamicTrigger(): void {

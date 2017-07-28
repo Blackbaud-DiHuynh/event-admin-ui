@@ -5,7 +5,8 @@ import { EventFormModalContext } from '../event-form-modal/event-from-modal-cont
 
 @Component({
     selector: 'event-create-button',
-    templateUrl: './event-create-button.component.html'
+    templateUrl: './event-create-button.component.html',
+    styleUrls: ['./event-create-button.component.scss']
 })
 export class EventCreateButtonComponent  {
 

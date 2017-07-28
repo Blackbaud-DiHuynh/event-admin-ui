@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="sky-input-group">
-                    <label>Time of Event: </label>
+                    <label class="time-label">Time of Event: </label>
                     <sky-datepicker #datePicker>
                         <input [(ngModel)]="event.date" name="date" [skyDatepickerInput]="datePicker" #date="ngModel" class="sky-form-control" />
                     </sky-datepicker>
@@ -32,22 +32,24 @@
                 </div>
 
                 <div class="sky-form-group input-price">
-                    <label>Ticket Price: </label>
+                    <label>Ticket price: </label>
                     <input #list=ngModel type="text" class="sky-form-control input-field" id="price" [(ngModel)]="event.tickets[0].basePrice" name="price">
                 </div>
                 <div class="sky-form-group">
                         <button *ngIf="dynamicTriggers.length===0" type="button" class="sky-btn sky-btn-primary add-dynamic-pricing-button" (click)="addDynamicTrigger()"> Add Dynamic Pricing Trigger</button>
                         <div *ngFor="let dynamicTrigger of dynamicTriggers; let i=index">
-                            <div class="sky-input-group">
-                                <label>Percent sold: </label>
+                            <h3>Dynamic Trigger #{{i+1}}</h3>
+                            <div class="sky-input-group percent-sold">
+                                <label class="percent-sold-label">Percent sold: </label>
                                 <input type="text" class="sky-form-control input-field" id="percentSoldThreshold" [(ngModel)]="dynamicTrigger.percentSoldThreshold" name="percentSoldThreshold.{{i}}" placeholder="%">
                             </div>
-                            <div class="sky-input-group">
-                                <label>Increase by: </label>
+                            <div class="sky-input-group increase-by">
+                                <label class="increase-by-label">Increase by: </label>
                                 <input type="text" class="sky-form-control input-field" id="priceChange" [(ngModel)]="dynamicTrigger.priceChange" name="priceChange.{{i}}" placeholder="$">
                             </div>
                         </div>
                     <button *ngIf="dynamicTriggers.length!==0" type="button" class="sky-btn sky-btn-primary add-dynamic-pricing-button" (click)="addDynamicTrigger()"> Add Dynamic Pricing Trigger</button>
+                    <button *ngIf="dynamicTriggers.length!==0" type="button" class="sky-btn sky-btn-default add-dynamic-pricing-button" (click)="removeDynamicTrigger()"> Remove Dynamic Pricing Trigger</button>
                 </div>
             </form>
         </div>
