@@ -38,15 +38,21 @@
     >
     </sky-grid-column>
     <sky-grid-column
-            id="remainingTickets"
-            field="remainingTickets"
+            id="remainingInventory"
+            field="remainingInventory"
             heading="Remaining Tickets"
     >
     </sky-grid-column>
     <sky-grid-column
-            id="tickets[0].basePrice"
-            field="price"
-            heading="Price"
+            id="basePrice"
+            [template]="price"
+            heading="Base Price"
+    >
+    </sky-grid-column>
+    <sky-grid-column
+            id="currentPrice"
+            [template]="price"
+            heading="Current Price"
     >
     </sky-grid-column>
 
@@ -56,5 +62,9 @@
 
     <ng-template let-value="value" #dateDisplay>
         {{value | date: 'medium'}}
+    </ng-template>
+
+    <ng-template let-value="value" #price>
+        {{value | currency:'USD':true:'1.2-2'}}
     </ng-template>
 </sky-grid>

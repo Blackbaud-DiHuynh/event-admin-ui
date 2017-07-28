@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import { EventService } from '../shared/EventService';
 import { Event } from '../shared/Event';
 import { EventSubmissionService } from '../shared/EventSubmissionService';
-import { SkyModalService } from '@blackbaud/skyux/dist/modules/modal';
 
 @Component({
     selector: 'event-grid',
@@ -15,7 +14,6 @@ export class EventGridComponent implements OnInit {
     private modalSubscription: Subscription;
 
     constructor(private eventService: EventService,
-                private modal: SkyModalService,
                 private eventSubmissionService: EventSubmissionService) { }
 
     public ngOnInit(): void {
@@ -59,10 +57,19 @@ export class EventGridComponent implements OnInit {
         this.eventService.getAllEvents().subscribe(
             retrievedEvents => {
                 this.events = retrievedEvents;
+                this.mapPrices(retrievedEvents);
             },
             error => {
                 console.log(error);
             }
         );
+    }
+
+    private mapPrices(retrievedEvents: Event[]): void {
+        for (let i = 0; i < retrievedEvents.length; i += 1) {
+            this.events[i].currentPrice = retrievedEvents[i].tickets[0].currentPrice;
+            this.events[i].basePrice = retrievedEvents[i].tickets[0].basePrice;
+
+        }
     }
 }
