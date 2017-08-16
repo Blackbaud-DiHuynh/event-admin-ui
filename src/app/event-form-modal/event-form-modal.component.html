@@ -29,11 +29,13 @@
                 <div class="sky-form-group input-capacity">
                     <label>Event capacity: </label>
                     <input #list=ngModel type="text" class="sky-form-control input-field" id="capacity" [(ngModel)]="event.capacity" name="capacity">
+                    <p class="event-error-message" *ngIf="badEventFlagForCapacity">You have entered an invalid capacity.</p>
                 </div>
 
                 <div class="sky-form-group input-price">
                     <label>Ticket price: </label>
                     <input #list=ngModel type="text" class="sky-form-control input-field" id="price" [(ngModel)]="event.tickets[0].basePrice" name="price" placeholder="$">
+                    <p class="event-error-message" *ngIf="badEventFlagForPrice">You have entered an invalid price.</p>
                 </div>
                 <div class="sky-form-group">
                         <button *ngIf="dynamicTriggers.length===0" type="button" class="sky-btn sky-btn-primary add-dynamic-pricing-button" (click)="addDynamicTrigger()"> Add Dynamic Pricing Trigger</button>

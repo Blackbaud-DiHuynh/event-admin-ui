@@ -20,6 +20,8 @@ export class EventFormModalComponent implements OnInit {
     public price: number;
     public selectedTime;
     public dynamicTriggers: DynamicRule[] = [];
+    public badEventFlagForCapacity: boolean = false;
+    public badEventFlagForPrice: boolean = false;
 
     constructor(public modalInstance: SkyModalInstance,
                 private eventService: EventService,
@@ -39,35 +41,37 @@ export class EventFormModalComponent implements OnInit {
     }
 
     public save(): void {
-        this.setTime();
-        if (this.operation === Operation.CREATE) {
-            this.event.tickets[0].capacity = this.event.capacity;
-            this.eventService.createEvent(this.event).subscribe(
-                savedEvent => {
-                    if (savedEvent.id !== -1) {
-                        this.event = savedEvent;
-                        this.eventSubmissionService.success(Operation.CREATE);
-                        this.modalInstance.save();
-                    } else {
-                        this.eventSubmissionService.failure(Operation.CREATE);
+        if (this.validateEvent(this.event.capacity, this.event.tickets[0].basePrice)) {
+            this.setTime();
+            if (this.operation === Operation.CREATE) {
+                this.event.tickets[0].capacity = this.event.capacity;
+                this.eventService.createEvent(this.event).subscribe(
+                    savedEvent => {
+                        if (savedEvent.id !== -1) {
+                            this.event = savedEvent;
+                            this.eventSubmissionService.success(Operation.CREATE);
+                            this.modalInstance.save();
+                        } else {
+                            this.eventSubmissionService.failure(Operation.CREATE);
+                        }
+                        this.processDynamicTrigger();
                     }
-                    this.processDynamicTrigger();
-                }
-            );
-        } else {
-            this.eventService.updateEvent(this.event).subscribe(
-                updatedEvent => {
-                    if (updatedEvent.id === this.event.id) {
-                        this.event = updatedEvent;
-                        this.eventSubmissionService.success(Operation.EDIT);
-                        this.modalInstance.save();
-                    } else {
-                        this.eventSubmissionService.failure(Operation.EDIT);
+                );
+            } else {
+                this.eventService.updateEvent(this.event).subscribe(
+                    updatedEvent => {
+                        if (updatedEvent.id === this.event.id) {
+                            this.event = updatedEvent;
+                            this.eventSubmissionService.success(Operation.EDIT);
+                            this.modalInstance.save();
+                        } else {
+                            this.eventSubmissionService.failure(Operation.EDIT);
+                        }
                     }
-                }
-            );
+                );
+            }
+            this.modalInstance.save();
         }
-        this.modalInstance.save();
     }
 
     public addDynamicTrigger(): void {
@@ -91,5 +95,25 @@ export class EventFormModalComponent implements OnInit {
     private setTime(): void {
         this.event.date.setHours(this.selectedTime.hour);
         this.event.date.setMinutes(this.selectedTime.minute);
+    }
+
+    private validateEvent(capacity: number, price: number) : boolean {
+        if (this.isNormalInteger(capacity.toString()) && capacity > 0) {
+            this.badEventFlagForCapacity = false;
+        } else {
+            this.badEventFlagForCapacity = true;
+        }
+
+        if (this.isNormalInteger(price.toString()) && price > 0) {
+            this.badEventFlagForPrice = false;
+        } else {
+            this.badEventFlagForPrice = true;
+        }
+
+        return this.badEventFlagForCapacity && this.badEventFlagForPrice;
+    }
+
+    private isNormalInteger(str : string) : boolean {
+        return /^\+?(0|[1-9]\d*)$/.test(str);
     }
 }
