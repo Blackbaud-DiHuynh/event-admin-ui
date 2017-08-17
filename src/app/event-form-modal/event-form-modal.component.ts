@@ -27,7 +27,7 @@ export class EventFormModalComponent implements OnInit {
                 private eventService: EventService,
                 private eventSubmissionService: EventSubmissionService,
                 private dynamicRuleService: DynamicRuleService,
-                public context: EventFormModalContext){ }
+                public context: EventFormModalContext) { }
 
     public ngOnInit(): void {
         if (this.context.event) {
@@ -97,7 +97,7 @@ export class EventFormModalComponent implements OnInit {
         this.event.date.setMinutes(this.selectedTime.minute);
     }
 
-    private validateEvent(capacity: number, price: number) : boolean {
+    private validateEvent(capacity: number, price: number): boolean {
         if (this.isNormalInteger(capacity.toString()) && capacity > 0) {
             this.badEventFlagForCapacity = false;
         } else {
@@ -110,10 +110,10 @@ export class EventFormModalComponent implements OnInit {
             this.badEventFlagForPrice = true;
         }
 
-        return this.badEventFlagForCapacity && this.badEventFlagForPrice;
+        return !(this.badEventFlagForCapacity || this.badEventFlagForPrice);
     }
 
-    private isNormalInteger(str : string) : boolean {
+    private isNormalInteger(str: string): boolean {
         return /^\+?(0|[1-9]\d*)$/.test(str);
     }
 }
